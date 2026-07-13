@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getLangKey } from "@/lib/lang-utils";
-import { avatarImg } from "../components/avatar.jpg";
 
 export default function ContactPage() {
   const { lang } = useLanguage();
@@ -103,9 +102,9 @@ export default function ContactPage() {
                 <div className="flex items-center gap-4">
                   <div className="size-24 rounded-full border-4 border-[#1a2332] shadow-xl shadow-[#D4AF37]/20 overflow-hidden">
                   <img
-                      src={avatarImg}
-                      alt="Zheying (Marcia) Liu"
-                      className="w-full h-full object-cover"
+                    src="https://github.com/marciazheyingliu/gold-hedging-full/blob/fcaa70496e092722d8448002f2aa3f22ac64290a/avatar.jpg?raw=true"
+                    alt="Zheying (Marcia) Liu"
+                    className="w-full h-full object-cover object-center"
                   />
                   </div>
                   <div>
