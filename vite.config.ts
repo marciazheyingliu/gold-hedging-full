@@ -11,6 +11,6 @@ export default defineConfig({
     },
   },
   build: {
-    cssMinify: 'esbuild', // 不使用 lightningcss，改用 esbuild 压缩
+    cssMinify: false, // 完全禁用 CSS 压缩，避免所有问题
   },
 })
