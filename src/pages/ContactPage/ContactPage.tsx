@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getLangKey } from "@/lib/lang-utils";
-import { avatarImg } from "@/../avatar.jpg";
+import avatarImg from "../../avatar.jpg";
 
 export default function ContactPage() {
   const { lang } = useLanguage();
