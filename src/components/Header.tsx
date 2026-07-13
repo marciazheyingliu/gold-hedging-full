@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { MessageSquare, Calculator, LineChart, BookOpen, FileText, Mail, Menu, ChevronDown, Globe } from 'lucide-react';
+import { MessageSquare, Calculator, LineChart, BookOpen, FileText, Mail, Menu, ChevronDown, Globe, Shield } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage, type Lang } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,7 @@ import {
 
 const NAV_ITEMS = [
   { path: '/', labelKey: 'nav.assistant', icon: MessageSquare },
+  { path: '/risk-assessment', labelKey: 'nav.risk', icon: Shield },
   { path: '/calculator', labelKey: 'nav.calculator', icon: Calculator },
   { path: '/backtest', labelKey: 'nav.backtest', icon: LineChart },
   { path: '/research', labelKey: 'nav.research', icon: BookOpen },

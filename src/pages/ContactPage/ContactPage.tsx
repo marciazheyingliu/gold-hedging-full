@@ -100,8 +100,12 @@ export default function ContactPage() {
               <div className="h-32 bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37]/30 to-[#B8860B]/20" />
               <CardHeader className="-mt-16 pb-4">
                 <div className="flex items-center gap-4">
-                  <div className="size-24 rounded-full border-4 border-[#1a2332] bg-gradient-to-br from-[#D4AF37] to-[#B8860B] flex items-center justify-center text-2xl font-bold text-[#1a2332] shadow-xl shadow-[#D4AF37]/20">
-                    M
+                  <div className="size-24 rounded-full border-4 border-[#1a2332] shadow-xl shadow-[#D4AF37]/20 overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces&auto=format&q=80"
+                      alt="Zheying (Marcia) Liu"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div>
                     <CardTitle className="text-2xl text-white">{contactInfo.name}</CardTitle>

@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 import HomePage from "@/pages/HomePage/HomePage";
+import RiskAssessmentPage from "@/pages/RiskAssessmentPage/RiskAssessmentPage";
 import CalculatorPage from "@/pages/CalculatorPage/CalculatorPage";
 import BacktestPage from "@/pages/BacktestPage/BacktestPage";
 import ResearchPage from "@/pages/ResearchPage/ResearchPage";
@@ -13,6 +14,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<HomePage />} />
+        <Route path="risk-assessment" element={<RiskAssessmentPage />} />
         <Route path="calculator" element={<CalculatorPage />} />
         <Route path="backtest" element={<BacktestPage />} />
         <Route path="research" element={<ResearchPage />} />

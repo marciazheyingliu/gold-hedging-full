@@ -270,7 +270,6 @@ export default function HomePage() {
             {/* Left: Sidebar */}
             <div className="lg:col-span-1 space-y-6">
               <MarketDataCard />
-              <AIConfigPanel />
             </div>
 
             {/* Right: Result */}

@@ -25,17 +25,97 @@ interface ResearchReport {
 const researchReports: ResearchReport[] = [
   {
     id: "1",
+    title: { zh: "2026年黄金投资策略展望", en: "2026 Gold Investment Strategy Outlook" },
+    description: { zh: "2026年全球宏观经济预测与黄金资产配置的前沿分析", en: "2026 global macroeconomic forecast and cutting-edge analysis of gold asset allocation" },
+    category: "gold",
+    date: "2026-07-10",
+    source: "World Gold Council",
+    sourceUrl: "https://www.gold.org/",
+    tags: ["2026", "黄金", "策略", "前沿"],
+    featured: true
+  },
+  {
+    id: "2",
+    title: { zh: "AI与量化交易对黄金市场的影响", en: "Impact of AI and Quantitative Trading on Gold Markets" },
+    description: { zh: "人工智能算法交易在黄金市场中的作用与未来趋势分析", en: "Analysis of AI algorithmic trading's role and future trends in gold markets" },
+    category: "strategy",
+    date: "2026-06-28",
+    source: "JPMorgan Quantitative Research",
+    sourceUrl: "https://www.jpmorgan.com/insights/research",
+    tags: ["AI", "量化", "技术"]
+  },
+  {
+    id: "3",
+    title: { zh: "央行数字货币与黄金储备战略", en: "Central Bank Digital Currencies and Gold Reserve Strategy" },
+    description: { zh: "2026年各国央行数字货币进展及对黄金储备政策的影响", en: "2026 global CBDC developments and impact on central bank gold reserve policies" },
+    category: "macro",
+    date: "2026-06-15",
+    source: "IMF Research",
+    sourceUrl: "https://www.imf.org/en/research",
+    tags: ["CBDC", "央行", "2026"]
+  },
+  {
+    id: "4",
+    title: { zh: "全球通胀与实际利率展望Q3 2026", en: "Global Inflation and Real Rate Outlook Q3 2026" },
+    description: { zh: "2026年第三季度全球通胀分析及对黄金和股市的影响预测", en: "Q3 2026 global inflation analysis and impact forecast for gold and equities" },
+    category: "macro",
+    date: "2026-07-01",
+    source: "BlackRock Investment Institute",
+    sourceUrl: "https://www.blackrock.com/institutions/en-us/insights/investment-institute",
+    tags: ["通胀", "利率", "2026", "前沿"]
+  },
+  {
+    id: "5",
+    title: { zh: "ESG投资中的黄金角色", en: "The Role of Gold in ESG Investing" },
+    description: { zh: "环境、社会与治理投资框架下的黄金资产价值重估", en: "Re-evaluating gold's value in environmental, social and governance investment frameworks" },
+    category: "gold",
+    date: "2026-05-20",
+    source: "Gold Council ESG Report",
+    sourceUrl: "https://www.gold.org/goldhub/research",
+    tags: ["ESG", "可持续", "创新"]
+  },
+  {
+    id: "6",
+    title: { zh: "2026年大类资产配置模型更新", en: "2026 Updated Asset Allocation Model" },
+    description: { zh: "基于最新市场数据重新校准的多资产配置优化模型", en: "Re-calibrated multi-asset allocation optimization model with latest market data" },
+    category: "strategy",
+    date: "2026-06-05",
+    source: "AQR Capital Management",
+    sourceUrl: "https://www.aqr.com/insights",
+    tags: ["模型", "资产配置", "2026"]
+  },
+  {
+    id: "7",
+    title: { zh: "能源转型中的大宗商品格局", en: "Commodity Landscape in Energy Transition" },
+    description: { zh: "新能源革命背景下的黄金、铜、锂等大宗商品市场分析", en: "Analysis of gold, copper, lithium and other commodity markets in the new energy revolution" },
+    category: "gold",
+    date: "2026-04-18",
+    source: "World Bank Commodities",
+    sourceUrl: "https://www.worldbank.org/en/research/commodity-markets",
+    tags: ["能源", "绿色", "创新"]
+  },
+  {
+    id: "8",
+    title: { zh: "新兴市场股市与黄金的动态相关性", en: "Dynamic Correlation Between EM Equities and Gold" },
+    description: { zh: "新兴市场股票指数与黄金价格的滚动相关性研究", en: "Rolling correlation study of emerging market equity indices and gold prices" },
+    category: "equity",
+    date: "2026-05-08",
+    source: "MSCI Research",
+    sourceUrl: "https://www.msci.com/research",
+    tags: ["新兴市场", "相关性", "量化"]
+  },
+  {
+    id: "9",
     title: { zh: "2024年黄金投资策略报告", en: "2024 Gold Investment Strategy Report" },
     description: { zh: "全面分析当前宏观经济环境下的黄金投资价值与配置建议", en: "Comprehensive analysis of gold investment value and allocation recommendations in the current macroeconomic environment" },
     category: "gold",
     date: "2024-06-15",
     source: "World Gold Council",
     sourceUrl: "https://www.gold.org/",
-    tags: ["黄金", "策略", "宏观"],
-    featured: true
+    tags: ["黄金", "策略", "宏观"]
   },
   {
-    id: "2",
+    id: "10",
     title: { zh: "大类资产配置研究：黄金的角色", en: "Asset Allocation Research: The Role of Gold" },
     description: { zh: "深入探讨黄金在多资产投资组合中的对冲和分散风险作用", en: "Deep dive into gold's hedging and diversification role in multi-asset portfolios" },
     category: "strategy",
@@ -45,8 +125,8 @@ const researchReports: ResearchReport[] = [
     tags: ["资产配置", "对冲"]
   },
   {
-    id: "3",
-    title: { zh: "全球宏观经济展望Q2", en: "Global Macro Economic Outlook Q2" },
+    id: "11",
+    title: { zh: "全球宏观经济回顾Q2", en: "Global Macro Economic Review Q2" },
     description: { zh: "2024年第二季度全球经济分析，包含通胀、利率与地缘政治风险分析", en: "Q2 2024 global economic analysis including inflation, interest rates and geopolitical risk" },
     category: "macro",
     date: "2024-04-10",
@@ -55,7 +135,7 @@ const researchReports: ResearchReport[] = [
     tags: ["宏观", "经济", "利率"]
   },
   {
-    id: "4",
+    id: "12",
     title: { zh: "黄金与股市：相关性分析", en: "Gold and Equities: Correlation Analysis" },
     description: { zh: "历史数据分析黄金与股市在不同市场环境下的相关性变化", en: "Historical data analysis of gold-equity correlation changes across different market regimes" },
     category: "equity",
@@ -63,26 +143,6 @@ const researchReports: ResearchReport[] = [
     source: "Bloomberg Intelligence",
     sourceUrl: "https://www.bloomberg.com/professional/solutions/bloomberg-intelligence/",
     tags: ["股市", "量化"]
-  },
-  {
-    id: "5",
-    title: { zh: "大宗商品市场年度回顾", en: "Commodity Markets Annual Review" },
-    description: { zh: "包括黄金、原油、铜等主要大宗商品的年度市场回顾与展望", en: "Annual market review and outlook for major commodities including gold, oil, copper and more" },
-    category: "gold",
-    date: "2024-02-14",
-    source: "World Bank Commodities",
-    sourceUrl: "https://www.worldbank.org/en/research/commodity-markets",
-    tags: ["大宗商品", "市场回顾"]
-  },
-  {
-    id: "6",
-    title: { zh: "地缘政治风险下的资产表现", en: "Asset Performance Under Geopolitical Risk" },
-    description: { zh: "研究黄金、美元、国债等避险资产在地缘政治紧张时期的表现", en: "Study of safe-haven assets like gold, USD and treasuries during geopolitical tensions" },
-    category: "strategy",
-    date: "2024-01-20",
-    source: "JPMorgan Research",
-    sourceUrl: "https://www.jpmorgan.com/insights/research",
-    tags: ["避险", "地缘政治"]
   }
 ];
 
