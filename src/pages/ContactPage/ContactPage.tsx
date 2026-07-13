@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getLangKey } from "@/lib/lang-utils";
+import { avatarImg } from "@/../avatar.jpg";
 
 export default function ContactPage() {
   const { lang } = useLanguage();
@@ -101,11 +102,11 @@ export default function ContactPage() {
               <CardHeader className="-mt-16 pb-4">
                 <div className="flex items-center gap-4">
                   <div className="size-24 rounded-full border-4 border-[#1a2332] shadow-xl shadow-[#D4AF37]/20 overflow-hidden">
-                    <img
-                      src="/avatar/marcia-avatar.jpg"
+                  <img
+                      src={avatarImg}
                       alt="Zheying (Marcia) Liu"
                       className="w-full h-full object-cover"
-                    />
+                  />
                   </div>
                   <div>
                     <CardTitle className="text-2xl text-white">{contactInfo.name}</CardTitle>
