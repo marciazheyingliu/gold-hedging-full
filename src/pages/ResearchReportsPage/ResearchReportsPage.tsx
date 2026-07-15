@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, FileText, Download, ExternalLink, Sparkles, Clock, BarChart3, Shield } from "lucide-react";
+import { Search, FileText, ExternalLink, Sparkles, Clock, BarChart3, Shield } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -25,124 +25,100 @@ interface ResearchReport {
 const researchReports: ResearchReport[] = [
   {
     id: "1",
-    title: { zh: "2026年黄金投资策略展望", en: "2026 Gold Investment Strategy Outlook" },
-    description: { zh: "2026年全球宏观经济预测与黄金资产配置的前沿分析", en: "2026 global macroeconomic forecast and cutting-edge analysis of gold asset allocation" },
+    title: {
+      zh: "黄金-通胀关系的经济驱动因素研究",
+      en: "On the economic determinants of the gold–inflation relation"
+    },
+    description: {
+      zh: "实证分析黄金对冲通胀效应的核心宏观变量，揭示黄金抗通胀能力的底层经济逻辑",
+      en: "Empirical analysis of core macro variables driving gold inflation hedging, revealing fundamental economic logic of gold’s inflation resistance"
+    },
     category: "gold",
-    date: "2026-07-10",
-    source: "World Gold Council",
-    sourceUrl: "https://www.gold.org/",
-    tags: ["2026", "黄金", "策略", "前沿"],
+    date: "2014-03",
+    source: "Resources Policy",
+    sourceUrl: "https://doi.org/10.1016/j.resourpol.2014.03.002",
+    tags: ["通胀对冲", "黄金定价", "宏观因子"],
     featured: true
   },
   {
     id: "2",
-    title: { zh: "AI与量化交易对黄金市场的影响", en: "Impact of AI and Quantitative Trading on Gold Markets" },
-    description: { zh: "人工智能算法交易在黄金市场中的作用与未来趋势分析", en: "Analysis of AI algorithmic trading's role and future trends in gold markets" },
+    title: {
+      zh: "黄金的非对称波动率特征研究",
+      en: "The asymmetric volatility of gold"
+    },
+    description: {
+      zh: "基于银行金融期刊框架，验证黄金价格涨跌阶段波动率存在显著非对称效应",
+      en: "Based on banking finance framework, verify significant asymmetric volatility during gold price rise and fall cycles"
+    },
     category: "strategy",
-    date: "2026-06-28",
-    source: "JPMorgan Quantitative Research",
-    sourceUrl: "https://www.jpmorgan.com/insights/research",
-    tags: ["AI", "量化", "技术"]
+    date: "2018-01",
+    source: "Journal of Banking & Finance",
+    sourceUrl: "https://doi.org/10.1016/j.jbankfin.2017.08.004",
+    tags: ["波动率", "非对称波动", "量化建模"]
   },
   {
     id: "3",
-    title: { zh: "央行数字货币与黄金储备战略", en: "Central Bank Digital Currencies and Gold Reserve Strategy" },
-    description: { zh: "2026年各国央行数字货币进展及对黄金储备政策的影响", en: "2026 global CBDC developments and impact on central bank gold reserve policies" },
+    title: {
+      zh: "时变系数框架下黄金的通胀对冲属性",
+      en: "Gold as an inflation hedge in a time-varying coefficient framework"
+    },
+    description: {
+      zh: "采用时变参数模型，证明黄金对冲通胀效果随宏观周期动态变化，不存在恒定对冲能力",
+      en: "Time-varying coefficient model proves gold inflation hedging power fluctuates across macro cycles with no constant hedging effect"
+    },
     category: "macro",
-    date: "2026-06-15",
-    source: "IMF Research",
-    sourceUrl: "https://www.imf.org/en/research",
-    tags: ["CBDC", "央行", "2026"]
+    date: "2013-12",
+    source: "The North American Journal of Economics and Finance",
+    sourceUrl: "https://doi.org/10.1016/j.najef.2012.10.007",
+    tags: ["时变模型", "通胀", "周期分析"]
   },
   {
     id: "4",
-    title: { zh: "全球通胀与实际利率展望Q3 2026", en: "Global Inflation and Real Rate Outlook Q3 2026" },
-    description: { zh: "2026年第三季度全球通胀分析及对黄金和股市的影响预测", en: "Q3 2026 global inflation analysis and impact forecast for gold and equities" },
-    category: "macro",
-    date: "2026-07-01",
-    source: "BlackRock Investment Institute",
-    sourceUrl: "https://www.blackrock.com/institutions/en-us/insights/investment-institute",
-    tags: ["通胀", "利率", "2026", "前沿"]
+    title: {
+      zh: "小波分析视角：比特币、黄金与大宗商品的股市避险属性对比",
+      en: "Bitcoin, gold, and commodities as safe havens for stocks: New insight through wavelet analysis"
+    },
+    description: {
+      zh: "多尺度小波分解对比黄金、加密货币、商品在股市危机中的避险能力差异",
+      en: "Multi-scale wavelet decomposition compares safe-haven performance of gold, crypto and commodities during stock market crises"
+    },
+    category: "equity",
+    date: "2020-03",
+    source: "Quarterly Review of Economics and Finance",
+    sourceUrl: "https://doi.org/10.1016/j.qref.2020.03.004",
+    tags: ["小波分析", "避险资产", "比特币", "股市联动"]
   },
   {
     id: "5",
-    title: { zh: "ESG投资中的黄金角色", en: "The Role of Gold in ESG Investing" },
-    description: { zh: "环境、社会与治理投资框架下的黄金资产价值重估", en: "Re-evaluating gold's value in environmental, social and governance investment frameworks" },
+    title: {
+      zh: "长期维度下黄金是否具备避险价值？跨周期、跨投资期限的对冲效果检验",
+      en: "Does gold glitter in the long-run? Gold as a hedge and safe haven across time and investment horizon"
+    },
+    description: {
+      zh: "区分短期/中长期投资周期，量化黄金对冲风险与危机避险的长期有效性边界",
+      en: "Distinguish short/long investment horizons, quantify effective boundary of gold’s hedging and safe-haven function over long term"
+    },
     category: "gold",
-    date: "2026-05-20",
-    source: "Gold Council ESG Report",
-    sourceUrl: "https://www.gold.org/goldhub/research",
-    tags: ["ESG", "可持续", "创新"]
+    date: "2015-02",
+    source: "International Review of Financial Analysis",
+    sourceUrl: "https://doi.org/10.1016/j.irfa.2015.01.010",
+    tags: ["长期配置", "避险资产", "投资期限"]
   },
   {
     id: "6",
-    title: { zh: "2026年大类资产配置模型更新", en: "2026 Updated Asset Allocation Model" },
-    description: { zh: "基于最新市场数据重新校准的多资产配置优化模型", en: "Re-calibrated multi-asset allocation optimization model with latest market data" },
-    category: "strategy",
-    date: "2026-06-05",
-    source: "AQR Capital Management",
-    sourceUrl: "https://www.aqr.com/insights",
-    tags: ["模型", "资产配置", "2026"]
-  },
-  {
-    id: "7",
-    title: { zh: "能源转型中的大宗商品格局", en: "Commodity Landscape in Energy Transition" },
-    description: { zh: "新能源革命背景下的黄金、铜、锂等大宗商品市场分析", en: "Analysis of gold, copper, lithium and other commodity markets in the new energy revolution" },
-    category: "gold",
-    date: "2026-04-18",
-    source: "World Bank Commodities",
-    sourceUrl: "https://www.worldbank.org/en/research/commodity-markets",
-    tags: ["能源", "绿色", "创新"]
-  },
-  {
-    id: "8",
-    title: { zh: "新兴市场股市与黄金的动态相关性", en: "Dynamic Correlation Between EM Equities and Gold" },
-    description: { zh: "新兴市场股票指数与黄金价格的滚动相关性研究", en: "Rolling correlation study of emerging market equity indices and gold prices" },
-    category: "equity",
-    date: "2026-05-08",
-    source: "MSCI Research",
-    sourceUrl: "https://www.msci.com/research",
-    tags: ["新兴市场", "相关性", "量化"]
-  },
-  {
-    id: "9",
-    title: { zh: "2024年黄金投资策略报告", en: "2024 Gold Investment Strategy Report" },
-    description: { zh: "全面分析当前宏观经济环境下的黄金投资价值与配置建议", en: "Comprehensive analysis of gold investment value and allocation recommendations in the current macroeconomic environment" },
-    category: "gold",
-    date: "2024-06-15",
-    source: "World Gold Council",
-    sourceUrl: "https://www.gold.org/",
-    tags: ["黄金", "策略", "宏观"]
-  },
-  {
-    id: "10",
-    title: { zh: "大类资产配置研究：黄金的角色", en: "Asset Allocation Research: The Role of Gold" },
-    description: { zh: "深入探讨黄金在多资产投资组合中的对冲和分散风险作用", en: "Deep dive into gold's hedging and diversification role in multi-asset portfolios" },
-    category: "strategy",
-    date: "2024-05-20",
-    source: "BlackRock Investment Institute",
-    sourceUrl: "https://www.blackrock.com/institutions/en-us/insights/investment-institute",
-    tags: ["资产配置", "对冲"]
-  },
-  {
-    id: "11",
-    title: { zh: "全球宏观经济回顾Q2", en: "Global Macro Economic Review Q2" },
-    description: { zh: "2024年第二季度全球经济分析，包含通胀、利率与地缘政治风险分析", en: "Q2 2024 global economic analysis including inflation, interest rates and geopolitical risk" },
+    title: {
+      zh: "美元贬值环境下黄金能否对冲风险、保值增值？",
+      en: "Can gold hedge and preserve value when the US dollar depreciates?"
+    },
+    description: {
+      zh: "计量建模验证美元走弱周期中黄金的保值对冲功能，分析汇率与金价联动机制",
+      en: "Econometric modeling verifies gold’s value-preserving hedging function amid USD depreciation and analyzes exchange rate-gold linkage"
+    },
     category: "macro",
-    date: "2024-04-10",
-    source: "IMF Research",
-    sourceUrl: "https://www.imf.org/en/research",
-    tags: ["宏观", "经济", "利率"]
-  },
-  {
-    id: "12",
-    title: { zh: "黄金与股市：相关性分析", en: "Gold and Equities: Correlation Analysis" },
-    description: { zh: "历史数据分析黄金与股市在不同市场环境下的相关性变化", en: "Historical data analysis of gold-equity correlation changes across different market regimes" },
-    category: "equity",
-    date: "2024-03-28",
-    source: "Bloomberg Intelligence",
-    sourceUrl: "https://www.bloomberg.com/professional/solutions/bloomberg-intelligence/",
-    tags: ["股市", "量化"]
+    date: "2014-02",
+    source: "Economic Modelling",
+    sourceUrl: "https://doi.org/10.1016/j.econmod.2014.01.007",
+    tags: ["美元汇率", "保值", "汇率联动"]
   }
 ];
 
@@ -200,17 +176,18 @@ export default function ResearchReportsPage() {
         >
           <Badge variant="outline" className="mb-4 border-[#D4AF37]/40 text-[#D4AF37] bg-[#D4AF37]/5">
             <Sparkles className="size-3.5 mr-1.5" />
-            {langKey === "zh" ? "免费研报" : "Free Research"}
+            {langKey === "zh" ? "学术文献" : "Academic Papers"}
           </Badge>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
             <span className="bg-gradient-to-r from-[#D4AF37] via-[#E8C96A] to-[#D4AF37] bg-clip-text text-transparent">
-              {langKey === "zh" ? "研究报告库" : "Research Reports"}
+              {langKey === "zh" ? "黄金金融学术文献库" : "Gold Finance Academic Library"}
             </span>
           </h1>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            {langKey === "zh" 
-              ? "精选全球权威机构的免费研究报告，助力您的投资决策" 
-              : "Curated free research reports from leading global institutions to support your investment decisions"}
+            {langKey === "zh"
+              ? "收录国际顶刊黄金定价、避险、通胀对冲相关实证论文，提供DOI直达原文"
+              : "Peer-reviewed top journal papers on gold pricing, safe haven & inflation hedge, direct DOI access"
+            }
           </p>
         </motion.div>
 
@@ -225,7 +202,7 @@ export default function ResearchReportsPage() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 size-4" />
             <Input
               type="text"
-              placeholder={langKey === "zh" ? "搜索报告标题或内容..." : "Search reports..."}
+              placeholder={langKey === "zh" ? "搜索论文标题、关键词..." : "Search paper title / keywords..."}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10 bg-[#0f1622] border-white/10 text-white placeholder:text-gray-500"
@@ -264,7 +241,7 @@ export default function ResearchReportsPage() {
                   <div className="absolute top-3 right-3">
                     <Badge className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#0f1622] border-none">
                       <Sparkles className="size-3 mr-1" />
-                      {langKey === "zh" ? "精选" : "Featured"}
+                      {langKey === "zh" ? "精选顶刊" : "Featured Top Journal"}
                     </Badge>
                   </div>
                 )}
@@ -306,7 +283,7 @@ export default function ResearchReportsPage() {
                   >
                     <a href={report.sourceUrl} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="size-4 mr-2" />
-                      {langKey === "zh" ? "查看报告" : "View Report"}
+                      {langKey === "zh" ? "通过DOI查看原文" : "Open via DOI"}
                     </a>
                   </Button>
                 </CardFooter>
@@ -324,10 +301,10 @@ export default function ResearchReportsPage() {
           >
             <FileText className="size-16 text-gray-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">
-              {langKey === "zh" ? "没有找到相关报告" : "No reports found"}
+              {langKey === "zh" ? "未匹配到相关学术论文" : "No matching academic papers found"}
             </h3>
             <p className="text-gray-400">
-              {langKey === "zh" ? "尝试更换搜索关键词或分类" : "Try changing search keywords or category"}
+              {langKey === "zh" ? "尝试调整搜索关键词或筛选分类" : "Try adjusting search keywords or category filter"}
             </p>
           </motion.div>
         )}
