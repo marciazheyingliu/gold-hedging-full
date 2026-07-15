@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, FileText, ExternalLink, Sparkles, Clock, BarChart3, Shield } from "lucide-react";
+import { Search, FileText, ExternalLink, Sparkles, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getLangKey } from "@/lib/lang-utils";
 
-// 研报数据
 interface ResearchReport {
   id: string;
   title: { zh: string; en: string };
@@ -20,11 +19,11 @@ interface ResearchReport {
   sourceUrl: string;
   tags: { zhCn: string; zhTw: string; en: string }[];
   featured?: boolean;
-  isLatest?: boolean; // 標記最新報告
+  isLatest?: boolean;
 }
 
 const researchReports: ResearchReport[] = [
-  // 1. 最新 2026-07-20 NBER工作論文 Latest標籤
+  // 1. 最新 NBER Working Paper 2026-07
   {
     id: "1",
     title: {
@@ -48,7 +47,7 @@ const researchReports: ResearchReport[] = [
     featured: true,
     isLatest: true
   },
-  // 2. In Gold We Trust 2026 20週年權威黃金年度報告
+  // 2. In Gold We Trust 2026
   {
     id: "2",
     title: {
@@ -62,7 +61,7 @@ const researchReports: ResearchReport[] = [
     category: "gold",
     date: "2026-05-20",
     source: "Incrementum AG",
-    sourceUrl: "httpsingoldwetrust.report/in-gold-we-trust-report/?lang=en",
+    sourceUrl: "https://ingoldwetrust.report/in-gold-we-trust-report/?lang=en",
     tags: [
       { zhCn: "奧地利學派", zhTw: "奧地利學派", en: "Austrian Economics" },
       { zhCn: "貨幣體系", zhTw: "貨幣體系", en: "Monetary System" },
@@ -70,70 +69,71 @@ const researchReports: ResearchReport[] = [
       { zhCn: "年度權威報告", zhTw: "年度權威報告", en: "Annual Flagship Report" }
     ]
   },
-  // 3. BlackRock 2026 Q3宏觀通脹報告（原有）
+  // 3. 2020 小波分析 股市/黃金/比特幣
   {
     id: "3",
     title: {
-      zh: "全球通脹與實質利率展望Q3 2026",
-      en: "Global Inflation and Real Rate Outlook Q3 2026"
+      zh: "小波分析視角：比特幣、黃金與大宗商品的股市避險屬性對比",
+      en: "Bitcoin, gold, and commodities as safe havens for stocks: New insight through wavelet analysis"
     },
     description: {
-      zh: "2026年第三季度全球通脹分析及對黃金和股市的影響預測",
-      en: "Q3 2026 global inflation analysis and impact forecast for gold and equities"
+      zh: "多尺度小波分解對比黃金、加密貨幣、商品在股市危機中的避險能力差異",
+      en: "Multi-scale wavelet decomposition compares safe-haven performance of gold, crypto and commodities during stock market crises"
     },
-    category: "macro",
-    date: "2026-07-01",
-    source: "BlackRock Investment Institute",
-    sourceUrl: "https://www.blackrock.com/institutions/en-us/insights/investment-institute",
+    category: "equity",
+    date: "2020-03",
+    source: "Quarterly Review of Economics and Finance",
+    sourceUrl: "https://doi.org/10.1016/j.qref.2020.03.004",
     tags: [
-      { zhCn: "通脹預測", zhTw: "通脹預測", en: "Inflation Forecast" },
-      { zhCn: "實質利率", zhTw: "實質利率", en: "Real Interest Rates" },
-      { zhCn: "資產定價", zhTw: "資產定價", en: "Asset Pricing" }
+      { zhCn: "小波分析", zhTw: "小波分析", en: "Wavelet Analysis" },
+      { zhCn: "避險資產", zhTw: "避險資產", en: "Safe Haven Asset" },
+      { zhCn: "比特幣", zhTw: "比特幣", en: "Bitcoin" },
+      { zhCn: "股市聯動", zhTw: "股市聯動", en: "Stock Market Linkage" }
     ]
   },
-  // 4. JPMorgan AI量化黃金市場報告（原有）
+  // 4. 2018 黃金非對稱波動
   {
     id: "4",
     title: {
-      zh: "AI與量化交易對黃金市場的影響",
-      en: "Impact of AI and Quantitative Trading on Gold Markets"
+      zh: "黃金的非對稱波動率特徵研究",
+      en: "The asymmetric volatility of gold"
     },
     description: {
-      zh: "人工智慧演算法交易在黃金市場中的作用與未來趨勢分析",
-      en: "Analysis of AI algorithmic trading's role and future trends in gold markets"
+      zh: "基於銀行金融期刊框架，驗證黃金價格漲跌階段波動率存在顯著非對稱效應",
+      en: "Based on banking finance framework, verify significant asymmetric volatility during gold price rise and fall cycles"
     },
     category: "strategy",
-    date: "2026-06-28",
-    source: "JPMorgan Quantitative Research",
-    sourceUrl: "https://www.jpmorgan.com/insights/research",
+    date: "2018-01",
+    source: "Journal of Banking & Finance",
+    sourceUrl: "https://doi.org/10.1016/j.jbankfin.2017.08.004",
     tags: [
-      { zhCn: "AI量化", zhTw: "AI量化", en: "AI Quant Trading" },
-      { zhCn: "演算法交易", zhTw: "演算法交易", en: "Algorithmic Trading" },
-      { zhCn: "市場流動性", zhTw: "市場流動性", en: "Market Liquidity" }
+      { zhCn: "波動率", zhTw: "波動率", en: "Volatility" },
+      { zhCn: "非對稱波動", zhTw: "非對稱波動", en: "Asymmetric Volatility" },
+      { zhCn: "量化建模", zhTw: "量化建模", en: "Quantitative Modeling" }
     ]
   },
-  // 5. IMF CBDC與黃金儲備（原有）
+  // 5. 2015 長期黃金避險
   {
     id: "5",
     title: {
-      zh: "央行數位貨幣與黃金儲備戰略",
-      en: "Central Bank Digital Currencies and Gold Reserve Strategy"
+      zh: "長期維度下黃金是否具備避險價值？跨週期、跨投資期限的對衝效果檢驗",
+      en: "Does gold glitter in the long-run? Gold as a hedge and safe haven across time and investment horizon"
     },
     description: {
-      zh: "2026年各國央行數位貨幣進展及對黃金儲備政策的影響",
-      en: "2026 global CBDC developments and impact on central bank gold reserve policies"
+      zh: "區分短期/中長期投資週期，量化黃金對衝風險與危機避險的長期有效性邊界",
+      en: "Distinguish short/long investment horizons, quantify effective boundary of gold’s hedging and safe-haven function over long term"
     },
-    category: "macro",
-    date: "2026-06-15",
-    source: "IMF Research",
-    sourceUrl: "https://www.imf.org/en/research",
+    category: "gold",
+    date: "2015-02",
+    source: "International Review of Financial Analysis",
+    sourceUrl: "https://doi.org/10.1016/j.irfa.2015.01.010",
     tags: [
-      { zhCn: "央行數位貨幣", zhTw: "央行數位貨幣", en: "CBDC" },
-      { zhCn: "央行儲備", zhTw: "央行儲備", en: "Central Bank Reserves" },
-      { zhCn: "數位貨幣", zhTw: "數位貨幣", en: "Digital Currency" }
+      { zhCn: "長期配置", zhTw: "長期配置", en: "Long-Term Allocation" },
+      { zhCn: "避險資產", zhTw: "避險資產", en: "Safe Haven Asset" },
+      { zhCn: "投資期限", zhTw: "投資期限", en: "Investment Horizon" }
     ]
   },
-  // 6. 2014 黃金通脹驅動因子期刊論文（原有）
+  // 6. 2014 黃金通脹驅動因子
   {
     id: "6",
     title: {
@@ -154,28 +154,28 @@ const researchReports: ResearchReport[] = [
       { zhCn: "宏觀因子", zhTw: "宏觀因子", en: "Macro Factors" }
     ]
   },
-  // 7. 2018 黃金非對稱波動論文（原有）
+  // 7. 2014 美元匯率與黃金保值
   {
     id: "7",
     title: {
-      zh: "黃金的非對稱波動率特徵研究",
-      en: "The asymmetric volatility of gold"
+      zh: "美元貶值環境下黃金能否對衝風險、保值增值？",
+      en: "Can gold hedge and preserve value when the US dollar depreciates?"
     },
     description: {
-      zh: "基於銀行金融期刊框架，驗證黃金價格漲跌階段波動率存在顯著非對稱效應",
-      en: "Based on banking finance framework, verify significant asymmetric volatility during gold price rise and fall cycles"
+      zh: "計量建模驗證美元走弱週期中黃金的保值對衝功能，分析匯率與金價聯動機制",
+      en: "Econometric modeling verifies gold’s value-preserving hedging function amid USD depreciation and analyzes exchange rate-gold linkage"
     },
-    category: "strategy",
-    date: "2018-01",
-    source: "Journal of Banking & Finance",
-    sourceUrl: "https://doi.org/10.1016/j.jbankfin.2017.08.004",
+    category: "macro",
+    date: "2014-02",
+    source: "Economic Modelling",
+    sourceUrl: "https://doi.org/10.1016/j.econmod.2014.01.007",
     tags: [
-      { zhCn: "波動率", zhTw: "波動率", en: "Volatility" },
-      { zhCn: "非對稱波動", zhTw: "非對稱波動", en: "Asymmetric Volatility" },
-      { zhCn: "量化建模", zhTw: "量化建模", en: "Quantitative Modeling" }
+      { zhCn: "美元匯率", zhTw: "美元匯率", en: "USD Exchange Rate" },
+      { zhCn: "保值", zhTw: "保值", en: "Value Preservation" },
+      { zhCn: "匯率聯動", zhTw: "匯率聯動", en: "Exchange Rate Linkage" }
     ]
   },
-  // 8. 2013 時變模型黃金通脹對衝（原有）
+  // 8. 2013 時變模型黃金通脹對衝
   {
     id: "8",
     title: {
@@ -194,70 +194,6 @@ const researchReports: ResearchReport[] = [
       { zhCn: "時變模型", zhTw: "時變模型", en: "Time-Varying Model" },
       { zhCn: "通脹", zhTw: "通脹", en: "Inflation" },
       { zhCn: "週期分析", zhTw: "週期分析", en: "Cycle Analysis" }
-    ]
-  },
-  // 9. 2020 小波分析避險資產對比（原有）
-  {
-    id: "9",
-    title: {
-      zh: "小波分析視角：比特幣、黃金與大宗商品的股市避險屬性對比",
-      en: "Bitcoin, gold, and commodities as safe havens for stocks: New insight through wavelet analysis"
-    },
-    description: {
-      zh: "多尺度小波分解對比黃金、加密貨幣、商品在股市危機中的避險能力差異",
-      en: "Multi-scale wavelet decomposition compares safe-haven performance of gold, crypto and commodities during stock market crises"
-    },
-    category: "equity",
-    date: "2020-03",
-    source: "Quarterly Review of Economics and Finance",
-    sourceUrl: "https://doi.org/10.1016/j.qref.2020.03.004",
-    tags: [
-      { zhCn: "小波分析", zhTw: "小波分析", en: "Wavelet Analysis" },
-      { zhCn: "避險資產", zhTw: "避險資產", en: "Safe Haven Asset" },
-      { zhCn: "比特幣", zhTw: "比特幣", en: "Bitcoin" },
-      { zhCn: "股市聯動", zhTw: "股市聯動", en: "Stock Market Linkage" }
-    ]
-  },
-  // 10. 2015 長期黃金避險論文（原有）
-  {
-    id: "10",
-    title: {
-      zh: "長期維度下黃金是否具備避險價值？跨週期、跨投資期限的對衝效果檢驗",
-      en: "Does gold glitter in the long-run? Gold as a hedge and safe haven across time and investment horizon"
-    },
-    description: {
-      zh: "區分短期/中長期投資週期，量化黃金對衝風險與危機避險的長期有效性邊界",
-      en: "Distinguish short/long investment horizons, quantify effective boundary of gold’s hedging and safe-haven function over long term"
-    },
-    category: "gold",
-    date: "2015-02",
-    source: "International Review of Financial Analysis",
-    sourceUrl: "https://doi.org/10.1016/j.irfa.2015.01.010",
-    tags: [
-      { zhCn: "長期配置", zhTw: "長期配置", en: "Long-Term Allocation" },
-      { zhCn: "避險資產", zhTw: "避險資產", en: "Safe Haven Asset" },
-      { zhCn: "投資期限", zhTw: "投資期限", en: "Investment Horizon" }
-    ]
-  },
-  // 11. 2014 美元匯率與黃金保值（原有）
-  {
-    id: "11",
-    title: {
-      zh: "美元貶值環境下黃金能否對衝風險、保值增值？",
-      en: "Can gold hedge and preserve value when the US dollar depreciates?"
-    },
-    description: {
-      zh: "計量建模驗證美元走弱週期中黃金的保值對衝功能，分析匯率與金價聯動機制",
-      en: "Econometric modeling verifies gold’s value-preserving hedging function amid USD depreciation and analyzes exchange rate-gold linkage"
-    },
-    category: "macro",
-    date: "2014-02",
-    source: "Economic Modelling",
-    sourceUrl: "https://doi.org/10.1016/j.econmod.2014.01.007",
-    tags: [
-      { zhCn: "美元匯率", zhTw: "美元匯率", en: "USD Exchange Rate" },
-      { zhCn: "保值", zhTw: "保值", en: "Value Preservation" },
-      { zhCn: "匯率聯動", zhTw: "匯率聯動", en: "Exchange Rate Linkage" }
     ]
   }
 ];
@@ -304,19 +240,13 @@ export default function ResearchReportsPage() {
     }
   };
 
-  // 根據語言獲取標籤文字：繁體中文 / 英文
   const getTagText = (tagItem: { zhCn: string; zhTw: string; en: string }) => {
-    if (langKey === "zh") {
-      return tagItem.zhTw;
-    } else {
-      return tagItem.en;
-    }
+    return langKey === "zh" ? tagItem.zhTw : tagItem.en;
   };
 
   return (
     <div className="min-h-[calc(100vh-4rem)] py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -340,7 +270,6 @@ export default function ResearchReportsPage() {
           </p>
         </motion.div>
 
-        {/* Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -371,7 +300,6 @@ export default function ResearchReportsPage() {
           </Select>
         </motion.div>
 
-        {/* Reports Grid */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -386,7 +314,6 @@ export default function ResearchReportsPage() {
               transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
             >
               <Card className={`bg-[#0f1622]/80 border-[#D4AF37]/20 backdrop-blur-sm hover:border-[#D4AF37]/50 transition-all h-full flex flex-col ${report.featured ? 'border-[#D4AF37]/50 ring-1 ring-[#D4AF37]/30' : ''}`}>
-                {/* Latest 最新標籤 */}
                 {report.isLatest && (
                   <div className="absolute top-3 left-3">
                     <Badge className="bg-rose-500 text-white border-none">
@@ -394,7 +321,6 @@ export default function ResearchReportsPage() {
                     </Badge>
                   </div>
                 )}
-                {/* 精選標籤 */}
                 {report.featured && (
                   <div className="absolute top-3 right-3">
                     <Badge className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#0f1622] border-none">
@@ -450,7 +376,6 @@ export default function ResearchReportsPage() {
           ))}
         </motion.div>
 
-        {/* Empty State */}
         {filteredReports.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
