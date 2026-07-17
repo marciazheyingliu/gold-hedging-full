@@ -17,7 +17,7 @@ function SimpleErrorRender({ error, resetErrorBoundary }: { error: Error; resetE
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename={process.env.CLIENT_BASE_PATH || "/"}>
+    <BrowserRouter basename={import.meta.env.CLIENT_BASE_PATH || "/"}>
       <ErrorBoundary
         fallbackRender={({ error, resetErrorBoundary }) => (
           <SimpleErrorRender error={error} resetErrorBoundary={resetErrorBoundary} />

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { getLangKey } from '@/lib/lang-utils';
 import { MarketDataCard } from '@/components/MarketDataCard';
 import { AIConfigPanel } from '@/components/AIConfigPanel';
@@ -24,27 +25,32 @@ import {
 } from '@/services/aiService';
 
 interface ExampleQuestion {
-  zh: string;
-  en: string;
+  'zh-CN': string;
+  'zh-TW': string;
+  'en': string;
 }
 
 const EXAMPLES: ExampleQuestion[] = [
   {
-    zh: '我重仓了科技股，应该配多少黄金对冲？',
-    en: 'I hold heavy tech stocks, how much gold should I allocate for hedging?',
+    'zh-CN': '我重仓了科技股，应该配多少黄金对冲？',
+    'zh-TW': '我重倉了科技股，應該配多少黃金對沖？',
+    'en': 'I hold heavy tech stocks, how much gold should I allocate for hedging?',
   },
   {
-    zh: '现在通胀高，能源股配多少黄金合适？',
-    en: 'Inflation is high now, how much gold for energy stocks?',
+    'zh-CN': '现在通胀高，能源股配多少黄金合适？',
+    'zh-TW': '現在通脹高，能源股配多少黃金合適？',
+    'en': 'Inflation is high now, how much gold for energy stocks?',
   },
   {
-    zh: '保守型投资者，消费行业怎么配黄金ETF？',
-    en: 'Conservative investor, how to allocate gold ETF for consumer sector?',
+    'zh-CN': '保守型投资者，消费行业怎么配黄金ETF？',
+    'zh-TW': '保守型投資者，消費行業怎麼配黃金ETF？',
+    'en': 'Conservative investor, how to allocate gold ETF for consumer sector?',
   },
 ];
 
 export default function HomePage() {
   const { t, lang } = useLanguage();
+  const { theme: appTheme } = useTheme();
   const langKey = getLangKey(lang);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);

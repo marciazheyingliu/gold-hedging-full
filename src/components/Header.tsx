@@ -1,7 +1,8 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { MessageSquare, Calculator, LineChart, BookOpen, FileText, Mail, Menu, ChevronDown, Globe, Shield } from 'lucide-react';
+import { MessageSquare, Calculator, LineChart, BookOpen, FileText, Mail, Menu, ChevronDown, Globe, Shield, Sun, Moon, Activity } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage, type Lang } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { path: '/risk-assessment', labelKey: 'nav.risk', icon: Shield },
   { path: '/calculator', labelKey: 'nav.calculator', icon: Calculator },
   { path: '/backtest', labelKey: 'nav.backtest', icon: LineChart },
+  { path: '/market', labelKey: 'nav.market', icon: Activity },
   { path: '/research', labelKey: 'nav.research', icon: BookOpen },
   { path: '/reports', labelKey: 'nav.reports', icon: FileText },
   { path: '/contact', labelKey: 'nav.contact', icon: Mail },
@@ -34,6 +36,7 @@ const LANGUAGE_OPTIONS: Array<{ value: Lang; label: string }> = [
 
 export default function Header() {
   const { t, lang, setLang } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -49,14 +52,20 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#1a2332]/90 backdrop-blur-lg border-b border-[#D4AF37]/20">
+    <header className={`sticky top-0 z-50 w-full backdrop-blur-lg border-b ${
+      theme === 'dark' 
+        ? 'bg-[#1a2332]/90 border-[#D4AF37]/20' 
+        : 'bg-white/90 border-gray-200'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex h-16 items-center justify-between">
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-2 shrink-0">
           <div className="size-9 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#B8860B] flex items-center justify-center text-[#1a2332] font-bold text-sm shadow-lg shadow-[#D4AF37]/20">
             Au
           </div>
-          <span className="text-white font-semibold text-lg hidden sm:block">
+          <span className={`font-semibold text-lg hidden sm:block ${
+            theme === 'dark' ? 'text-white' : 'text-gray-900'
+          }`}>
             {getLogoText()}
           </span>
         </NavLink>
@@ -74,8 +83,12 @@ export default function Header() {
                 end={item.path === '/'}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
                   isActive
-                    ? 'text-[#D4AF37] bg-[#D4AF37]/10'
-                    : 'text-gray-300 hover:text-white hover:bg-white/5'
+                    ? theme === 'dark'
+                      ? 'text-[#D4AF37] bg-[#D4AF37]/10'
+                      : 'text-primary bg-primary/10'
+                    : theme === 'dark'
+                      ? 'text-gray-300 hover:text-white hover:bg-white/5'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 <Icon className="size-4" />
@@ -85,8 +98,18 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Right: Lang dropdown + Mobile menu */}
+        {/* Right: Theme toggle + Lang dropdown + Mobile menu */}
         <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            className="text-gray-300 hover:text-[#D4AF37] hover:bg-[#D4AF37]/10"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          </Button>
+          
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -99,13 +122,23 @@ export default function Header() {
                 <ChevronDown className="size-3" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-[#0f1622] border border-[#D4AF37]/20 text-white">
+            <DropdownMenuContent align="end" className={`${
+              theme === 'dark' 
+                ? 'bg-[#0f1622] border border-[#D4AF37]/20 text-white' 
+                : 'bg-white border border-gray-200 text-gray-900'
+            }`}>
               {LANGUAGE_OPTIONS.map((option) => (
                 <DropdownMenuItem
                   key={option.value}
                   onClick={() => setLang(option.value)}
                   className={`cursor-pointer ${
-                    lang === option.value ? 'text-[#D4AF37] bg-[#D4AF37]/10' : 'text-gray-300 hover:text-white hover:bg-white/5'
+                    lang === option.value 
+                      ? theme === 'dark' 
+                        ? 'text-[#D4AF37] bg-[#D4AF37]/10' 
+                        : 'text-primary bg-primary/10' 
+                      : theme === 'dark' 
+                        ? 'text-gray-300 hover:text-white hover:bg-white/5' 
+                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
                   }`}
                 >
                   {option.label}
@@ -126,7 +159,11 @@ export default function Header() {
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 bg-[#1a2332] border-l border-[#D4AF37]/20 text-white">
+            <SheetContent side="right" className={`w-72 ${
+              theme === 'dark' 
+                ? 'bg-[#1a2332] border-l border-[#D4AF37]/20 text-white' 
+                : 'bg-white border-l border-gray-200 text-gray-900'
+            }`}>
               <div className="flex flex-col gap-2 pt-8">
               {NAV_ITEMS.map((item) => {
                 const Icon = item.icon;
@@ -139,8 +176,12 @@ export default function Header() {
                       end={item.path === '/'}
                       className={`px-4 py-3 rounded-md text-sm font-medium transition-colors flex items-center gap-3 ${
                         isActive
-                          ? 'text-[#D4AF37] bg-[#D4AF37]/10'
-                          : 'text-gray-300 hover:text-white hover:bg-white/5'
+                          ? theme === 'dark'
+                            ? 'text-[#D4AF37] bg-[#D4AF37]/10'
+                            : 'text-primary bg-primary/10'
+                          : theme === 'dark'
+                            ? 'text-gray-300 hover:text-white hover:bg-white/5'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                       }`}
                       onClick={() => setMobileOpen(false)}
                     >
