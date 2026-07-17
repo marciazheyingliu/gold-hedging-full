@@ -671,8 +671,8 @@ export default function MarketDashboard() {
                 <h3 className="font-semibold text-lg mb-3">{lang === 'en' ? 'Research Citation' : '研究引用'}</h3>
                 <p className="text-sm text-muted-foreground italic">
                   {lang === 'en' 
-                    ? '"Gold Hedging in Equity Portfolios: A Sector-Level, State-Dependent Analysis" - Journal of Financial Economics, 2024'
-                    : '"股票投资组合中的黄金对冲：行业层面、状态依赖分析" - 金融经济学杂志，2024'}
+                    ? '"Is gold a hedge or a safe haven? An analysis of stocks, bonds and gold." - The Financial Review , 2010'
+                    : '"黄金是避险还是安全港？对股票、债券和黄金的分析" - 金融评论，2010'}
                 </p>
               </div>
             </CardContent>
