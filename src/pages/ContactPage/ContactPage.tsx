@@ -37,14 +37,14 @@ export default function ContactPage() {
       name: "LinkedIn",
       icon: Linkedin,
       value: "LinkedIn Profile",
-      url: "#",
+      url: "https://www.linkedin.com/in/zheying-l-063562199/",
       color: "text-blue-400"
     },
     {
       name: "GitHub",
       icon: Github,
       value: "GitHub Profile",
-      url: "#",
+      url: "https://marciazheyingliu.github.io/",
       color: "text-gray-300"
     }
   ];
@@ -101,11 +101,11 @@ export default function ContactPage() {
               <CardHeader className="-mt-16 pb-4">
                 <div className="flex items-center gap-4">
                   <div className="size-24 rounded-full border-4 border-[#1a2332] shadow-xl shadow-[#D4AF37]/20 overflow-hidden">
-                    <img
-                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces&auto=format&q=80"
-                      alt="Zheying (Marcia) Liu"
-                      className="w-full h-full object-cover"
-                    />
+                  <img
+                    src="https://github.com/marciazheyingliu/gold-hedging-full/blob/fcaa70496e092722d8448002f2aa3f22ac64290a/avatar.jpg?raw=true"
+                    alt="Zheying (Marcia) Liu"
+                    className="w-full h-full object-cover object-center"
+                  />
                   </div>
                   <div>
                     <CardTitle className="text-2xl text-white">{contactInfo.name}</CardTitle>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, FileText, Download, ExternalLink, Sparkles, Clock, BarChart3, Shield } from "lucide-react";
+import { Search, FileText, ExternalLink, Sparkles, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getLangKey } from "@/lib/lang-utils";
 
-// 研报数据
 interface ResearchReport {
   id: string;
   title: { zh: string; en: string };
@@ -18,140 +17,193 @@ interface ResearchReport {
   date: string;
   source: string;
   sourceUrl: string;
-  tags: string[];
+  tags: { zhCn: string; zhTw: string; en: string }[];
   featured?: boolean;
+  isLatest?: boolean;
 }
 
 const researchReports: ResearchReport[] = [
+  // 1. 最新 NBER Working Paper 2026-07
   {
     id: "1",
-    title: { zh: "2026年黄金投资策略展望", en: "2026 Gold Investment Strategy Outlook" },
-    description: { zh: "2026年全球宏观经济预测与黄金资产配置的前沿分析", en: "2026 global macroeconomic forecast and cutting-edge analysis of gold asset allocation" },
-    category: "gold",
-    date: "2026-07-10",
-    source: "World Gold Council",
-    sourceUrl: "https://www.gold.org/",
-    tags: ["2026", "黄金", "策略", "前沿"],
-    featured: true
+    title: {
+      zh: "地緣分裂時期：美國貨幣溢出、外匯市場與黃金儲備研究",
+      en: "US Monetary Spillovers, Foreign Exchange, and Gold Reserves at Times of Geopolitical Fragmentation"
+    },
+    description: {
+      zh: "剖析地緣格局分裂環境下美國貨幣政策外溢效應，匯率波動與各國央行黃金儲備調配的關聯機制，NBER權威工作論文",
+      en: "Analyze US monetary spillover effects amid geopolitical fragmentation, linkage between FX volatility and central bank gold reserve allocation, authoritative NBER working paper"
+    },
+    category: "macro",
+    date: "2026-07-20",
+    source: "NBER Working Paper No.35337",
+    sourceUrl: "https://doi.org/10.3386/w35337",
+    tags: [
+      { zhCn: "地缘分裂", zhTw: "地緣分裂", en: "Geopolitical Fragmentation" },
+      { zhCn: "貨幣溢出", zhTw: "貨幣溢出", en: "Monetary Spillovers" },
+      { zhCn: "央行黃金儲備", zhTw: "央行黃金儲備", en: "Central Bank Gold Reserves" },
+      { zhCn: "匯率波動", zhTw: "匯率波動", en: "FX Volatility" }
+    ],
+    featured: true,
+    isLatest: true
   },
+  // 2. In Gold We Trust 2026
   {
     id: "2",
-    title: { zh: "AI与量化交易对黄金市场的影响", en: "Impact of AI and Quantitative Trading on Gold Markets" },
-    description: { zh: "人工智能算法交易在黄金市场中的作用与未来趋势分析", en: "Analysis of AI algorithmic trading's role and future trends in gold markets" },
-    category: "strategy",
-    date: "2026-06-28",
-    source: "JPMorgan Quantitative Research",
-    sourceUrl: "https://www.jpmorgan.com/insights/research",
-    tags: ["AI", "量化", "技术"]
-  },
-  {
-    id: "3",
-    title: { zh: "央行数字货币与黄金储备战略", en: "Central Bank Digital Currencies and Gold Reserve Strategy" },
-    description: { zh: "2026年各国央行数字货币进展及对黄金储备政策的影响", en: "2026 global CBDC developments and impact on central bank gold reserve policies" },
-    category: "macro",
-    date: "2026-06-15",
-    source: "IMF Research",
-    sourceUrl: "https://www.imf.org/en/research",
-    tags: ["CBDC", "央行", "2026"]
-  },
-  {
-    id: "4",
-    title: { zh: "全球通胀与实际利率展望Q3 2026", en: "Global Inflation and Real Rate Outlook Q3 2026" },
-    description: { zh: "2026年第三季度全球通胀分析及对黄金和股市的影响预测", en: "Q3 2026 global inflation analysis and impact forecast for gold and equities" },
-    category: "macro",
-    date: "2026-07-01",
-    source: "BlackRock Investment Institute",
-    sourceUrl: "https://www.blackrock.com/institutions/en-us/insights/investment-institute",
-    tags: ["通胀", "利率", "2026", "前沿"]
-  },
-  {
-    id: "5",
-    title: { zh: "ESG投资中的黄金角色", en: "The Role of Gold in ESG Investing" },
-    description: { zh: "环境、社会与治理投资框架下的黄金资产价值重估", en: "Re-evaluating gold's value in environmental, social and governance investment frameworks" },
+    title: {
+      zh: "In Gold We Trust 2026：重返貨幣未來（20週年紀念版）",
+      en: "In Gold We Trust 2026: Back to the Monetary Future (20th Anniversary Edition)"
+    },
+    description: {
+      zh: "奧地利學派視角全球宏觀與黃金年度重磅報告，450+頁深度分析，覆蓋貨幣貶值、制裁、儲備多元化、礦業產業鏈，全球60+國家引用",
+      en: "Austrian School perspective annual flagship gold report with 450+ pages, covers currency debasement, sanctions, reserve diversification & mining industry, cited across 60+ countries"
+    },
     category: "gold",
     date: "2026-05-20",
-    source: "Gold Council ESG Report",
-    sourceUrl: "https://www.gold.org/goldhub/research",
-    tags: ["ESG", "可持续", "创新"]
+    source: "Incrementum AG",
+    sourceUrl: "https://ingoldwetrust.report/in-gold-we-trust-report/?lang=en",
+    tags: [
+      { zhCn: "奧地利學派", zhTw: "奧地利學派", en: "Austrian Economics" },
+      { zhCn: "貨幣體系", zhTw: "貨幣體系", en: "Monetary System" },
+      { zhCn: "黃金儲備多元化", zhTw: "黃金儲備多元化", en: "Gold Reserve Diversification" },
+      { zhCn: "年度權威報告", zhTw: "年度權威報告", en: "Annual Flagship Report" }
+    ]
   },
+  // 3. 2020 小波分析 股市/黃金/比特幣
+  {
+    id: "3",
+    title: {
+      zh: "小波分析視角：比特幣、黃金與大宗商品的股市避險屬性對比",
+      en: "Bitcoin, gold, and commodities as safe havens for stocks: New insight through wavelet analysis"
+    },
+    description: {
+      zh: "多尺度小波分解對比黃金、加密貨幣、商品在股市危機中的避險能力差異",
+      en: "Multi-scale wavelet decomposition compares safe-haven performance of gold, crypto and commodities during stock market crises"
+    },
+    category: "equity",
+    date: "2020-03",
+    source: "Quarterly Review of Economics and Finance",
+    sourceUrl: "https://doi.org/10.1016/j.qref.2020.03.004",
+    tags: [
+      { zhCn: "小波分析", zhTw: "小波分析", en: "Wavelet Analysis" },
+      { zhCn: "避險資產", zhTw: "避險資產", en: "Safe Haven Asset" },
+      { zhCn: "比特幣", zhTw: "比特幣", en: "Bitcoin" },
+      { zhCn: "股市聯動", zhTw: "股市聯動", en: "Stock Market Linkage" }
+    ]
+  },
+  // 4. 2018 黃金非對稱波動
+  {
+    id: "4",
+    title: {
+      zh: "黃金的非對稱波動率特徵研究",
+      en: "The asymmetric volatility of gold"
+    },
+    description: {
+      zh: "基於銀行金融期刊框架，驗證黃金價格漲跌階段波動率存在顯著非對稱效應",
+      en: "Based on banking finance framework, verify significant asymmetric volatility during gold price rise and fall cycles"
+    },
+    category: "strategy",
+    date: "2018-01",
+    source: "Journal of Banking & Finance",
+    sourceUrl: "https://doi.org/10.1016/j.jbankfin.2017.08.004",
+    tags: [
+      { zhCn: "波動率", zhTw: "波動率", en: "Volatility" },
+      { zhCn: "非對稱波動", zhTw: "非對稱波動", en: "Asymmetric Volatility" },
+      { zhCn: "量化建模", zhTw: "量化建模", en: "Quantitative Modeling" }
+    ]
+  },
+  // 5. 2015 長期黃金避險
+  {
+    id: "5",
+    title: {
+      zh: "長期維度下黃金是否具備避險價值？跨週期、跨投資期限的對衝效果檢驗",
+      en: "Does gold glitter in the long-run? Gold as a hedge and safe haven across time and investment horizon"
+    },
+    description: {
+      zh: "區分短期/中長期投資週期，量化黃金對衝風險與危機避險的長期有效性邊界",
+      en: "Distinguish short/long investment horizons, quantify effective boundary of gold’s hedging and safe-haven function over long term"
+    },
+    category: "gold",
+    date: "2015-02",
+    source: "International Review of Financial Analysis",
+    sourceUrl: "https://doi.org/10.1016/j.irfa.2015.01.010",
+    tags: [
+      { zhCn: "長期配置", zhTw: "長期配置", en: "Long-Term Allocation" },
+      { zhCn: "避險資產", zhTw: "避險資產", en: "Safe Haven Asset" },
+      { zhCn: "投資期限", zhTw: "投資期限", en: "Investment Horizon" }
+    ]
+  },
+  // 6. 2014 黃金通脹驅動因子
   {
     id: "6",
-    title: { zh: "2026年大类资产配置模型更新", en: "2026 Updated Asset Allocation Model" },
-    description: { zh: "基于最新市场数据重新校准的多资产配置优化模型", en: "Re-calibrated multi-asset allocation optimization model with latest market data" },
-    category: "strategy",
-    date: "2026-06-05",
-    source: "AQR Capital Management",
-    sourceUrl: "https://www.aqr.com/insights",
-    tags: ["模型", "资产配置", "2026"]
+    title: {
+      zh: "黃金-通脹關係的經濟驅動因素研究",
+      en: "On the economic determinants of the gold–inflation relation"
+    },
+    description: {
+      zh: "實證分析黃金對衝通脹效應的核心宏觀變數，揭示黃金抗通脹能力的底層經濟邏輯",
+      en: "Empirical analysis of core macro variables driving gold inflation hedging, revealing fundamental economic logic of gold’s inflation resistance"
+    },
+    category: "gold",
+    date: "2014-03",
+    source: "Resources Policy",
+    sourceUrl: "https://doi.org/10.1016/j.resourpol.2014.03.002",
+    tags: [
+      { zhCn: "通脹對衝", zhTw: "通脹對衝", en: "Inflation Hedge" },
+      { zhCn: "黃金定價", zhTw: "黃金定價", en: "Gold Pricing" },
+      { zhCn: "宏觀因子", zhTw: "宏觀因子", en: "Macro Factors" }
+    ]
   },
+  // 7. 2014 美元匯率與黃金保值
   {
     id: "7",
-    title: { zh: "能源转型中的大宗商品格局", en: "Commodity Landscape in Energy Transition" },
-    description: { zh: "新能源革命背景下的黄金、铜、锂等大宗商品市场分析", en: "Analysis of gold, copper, lithium and other commodity markets in the new energy revolution" },
-    category: "gold",
-    date: "2026-04-18",
-    source: "World Bank Commodities",
-    sourceUrl: "https://www.worldbank.org/en/research/commodity-markets",
-    tags: ["能源", "绿色", "创新"]
+    title: {
+      zh: "美元貶值環境下黃金能否對衝風險、保值增值？",
+      en: "Can gold hedge and preserve value when the US dollar depreciates?"
+    },
+    description: {
+      zh: "計量建模驗證美元走弱週期中黃金的保值對衝功能，分析匯率與金價聯動機制",
+      en: "Econometric modeling verifies gold’s value-preserving hedging function amid USD depreciation and analyzes exchange rate-gold linkage"
+    },
+    category: "macro",
+    date: "2014-02",
+    source: "Economic Modelling",
+    sourceUrl: "https://doi.org/10.1016/j.econmod.2014.01.007",
+    tags: [
+      { zhCn: "美元匯率", zhTw: "美元匯率", en: "USD Exchange Rate" },
+      { zhCn: "保值", zhTw: "保值", en: "Value Preservation" },
+      { zhCn: "匯率聯動", zhTw: "匯率聯動", en: "Exchange Rate Linkage" }
+    ]
   },
+  // 8. 2013 時變模型黃金通脹對衝
   {
     id: "8",
-    title: { zh: "新兴市场股市与黄金的动态相关性", en: "Dynamic Correlation Between EM Equities and Gold" },
-    description: { zh: "新兴市场股票指数与黄金价格的滚动相关性研究", en: "Rolling correlation study of emerging market equity indices and gold prices" },
-    category: "equity",
-    date: "2026-05-08",
-    source: "MSCI Research",
-    sourceUrl: "https://www.msci.com/research",
-    tags: ["新兴市场", "相关性", "量化"]
-  },
-  {
-    id: "9",
-    title: { zh: "2024年黄金投资策略报告", en: "2024 Gold Investment Strategy Report" },
-    description: { zh: "全面分析当前宏观经济环境下的黄金投资价值与配置建议", en: "Comprehensive analysis of gold investment value and allocation recommendations in the current macroeconomic environment" },
-    category: "gold",
-    date: "2024-06-15",
-    source: "World Gold Council",
-    sourceUrl: "https://www.gold.org/",
-    tags: ["黄金", "策略", "宏观"]
-  },
-  {
-    id: "10",
-    title: { zh: "大类资产配置研究：黄金的角色", en: "Asset Allocation Research: The Role of Gold" },
-    description: { zh: "深入探讨黄金在多资产投资组合中的对冲和分散风险作用", en: "Deep dive into gold's hedging and diversification role in multi-asset portfolios" },
-    category: "strategy",
-    date: "2024-05-20",
-    source: "BlackRock Investment Institute",
-    sourceUrl: "https://www.blackrock.com/institutions/en-us/insights/investment-institute",
-    tags: ["资产配置", "对冲"]
-  },
-  {
-    id: "11",
-    title: { zh: "全球宏观经济回顾Q2", en: "Global Macro Economic Review Q2" },
-    description: { zh: "2024年第二季度全球经济分析，包含通胀、利率与地缘政治风险分析", en: "Q2 2024 global economic analysis including inflation, interest rates and geopolitical risk" },
+    title: {
+      zh: "時變係數框架下黃金的通脹對衝屬性",
+      en: "Gold as an inflation hedge in a time-varying coefficient framework"
+    },
+    description: {
+      zh: "採用時變參數模型，證明黃金對衝通脹效果隨宏觀週期動態變化，不存在恆定對衝能力",
+      en: "Time-varying coefficient model proves gold inflation hedging power fluctuates across macro cycles with no constant hedging effect"
+    },
     category: "macro",
-    date: "2024-04-10",
-    source: "IMF Research",
-    sourceUrl: "https://www.imf.org/en/research",
-    tags: ["宏观", "经济", "利率"]
-  },
-  {
-    id: "12",
-    title: { zh: "黄金与股市：相关性分析", en: "Gold and Equities: Correlation Analysis" },
-    description: { zh: "历史数据分析黄金与股市在不同市场环境下的相关性变化", en: "Historical data analysis of gold-equity correlation changes across different market regimes" },
-    category: "equity",
-    date: "2024-03-28",
-    source: "Bloomberg Intelligence",
-    sourceUrl: "https://www.bloomberg.com/professional/solutions/bloomberg-intelligence/",
-    tags: ["股市", "量化"]
+    date: "2013-12",
+    source: "The North American Journal of Economics and Finance",
+    sourceUrl: "https://doi.org/10.1016/j.najef.2012.10.007",
+    tags: [
+      { zhCn: "時變模型", zhTw: "時變模型", en: "Time-Varying Model" },
+      { zhCn: "通脹", zhTw: "通脹", en: "Inflation" },
+      { zhCn: "週期分析", zhTw: "週期分析", en: "Cycle Analysis" }
+    ]
   }
 ];
 
 const categories = [
   { value: "all", label: { zh: "全部", en: "All" } },
-  { value: "gold", label: { zh: "黄金专题", en: "Gold Focus" } },
-  { value: "equity", label: { zh: "股市相关", en: "Equities" } },
-  { value: "macro", label: { zh: "宏观经济", en: "Macro" } },
-  { value: "strategy", label: { zh: "投资策略", en: "Strategy" } }
+  { value: "gold", label: { zh: "黃金專題", en: "Gold Focus" } },
+  { value: "equity", label: { zh: "股市相關", en: "Equities" } },
+  { value: "macro", label: { zh: "宏觀經濟", en: "Macro" } },
+  { value: "strategy", label: { zh: "投資策略", en: "Strategy" } }
 ];
 
 export default function ResearchReportsPage() {
@@ -180,18 +232,21 @@ export default function ResearchReportsPage() {
 
   const getCategoryLabel = (cat: string) => {
     switch (cat) {
-      case "gold": return langKey === "zh" ? "黄金" : "Gold";
+      case "gold": return langKey === "zh" ? "黃金" : "Gold";
       case "equity": return langKey === "zh" ? "股市" : "Equity";
-      case "macro": return langKey === "zh" ? "宏观" : "Macro";
+      case "macro": return langKey === "zh" ? "宏觀" : "Macro";
       case "strategy": return langKey === "zh" ? "策略" : "Strategy";
       default: return cat;
     }
   };
 
+  const getTagText = (tagItem: { zhCn: string; zhTw: string; en: string }) => {
+    return langKey === "zh" ? tagItem.zhTw : tagItem.en;
+  };
+
   return (
     <div className="min-h-[calc(100vh-4rem)] py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -200,21 +255,21 @@ export default function ResearchReportsPage() {
         >
           <Badge variant="outline" className="mb-4 border-[#D4AF37]/40 text-[#D4AF37] bg-[#D4AF37]/5">
             <Sparkles className="size-3.5 mr-1.5" />
-            {langKey === "zh" ? "免费研报" : "Free Research"}
+            {langKey === "zh" ? "學術文獻 & 權威年度報告" : "Academic Papers & Flagship Reports"}
           </Badge>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
             <span className="bg-gradient-to-r from-[#D4AF37] via-[#E8C96A] to-[#D4AF37] bg-clip-text text-transparent">
-              {langKey === "zh" ? "研究报告库" : "Research Reports"}
+              {langKey === "zh" ? "黃金金融研究文獻庫" : "Gold Finance Research Library"}
             </span>
           </h1>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            {langKey === "zh" 
-              ? "精选全球权威机构的免费研究报告，助力您的投资决策" 
-              : "Curated free research reports from leading global institutions to support your investment decisions"}
+            {langKey === "zh"
+              ? "收錄國際頂刊論文、權威機構年度黃金報告，涵蓋宏觀、量化、避險、央行儲備主題，提供DOI/官網直達原文"
+              : "Peer-reviewed journal papers & institutional flagship gold reports, covering macro, quant, safe haven & central bank reserves, direct DOI/website access"
+            }
           </p>
         </motion.div>
 
-        {/* Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -225,7 +280,7 @@ export default function ResearchReportsPage() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 size-4" />
             <Input
               type="text"
-              placeholder={langKey === "zh" ? "搜索报告标题或内容..." : "Search reports..."}
+              placeholder={langKey === "zh" ? "搜尋報告標題、關鍵字..." : "Search report title / keywords..."}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10 bg-[#0f1622] border-white/10 text-white placeholder:text-gray-500"
@@ -233,7 +288,7 @@ export default function ResearchReportsPage() {
           </div>
           <Select value={category} onValueChange={setCategory}>
             <SelectTrigger className="w-full md:w-48 bg-[#0f1622] border-white/10 text-white">
-              <SelectValue placeholder={langKey === "zh" ? "分类" : "Category"} />
+              <SelectValue placeholder={langKey === "zh" ? "分類" : "Category"} />
             </SelectTrigger>
             <SelectContent className="bg-[#1a2332] border-[#D4AF37]/20 text-white">
               {categories.map((cat) => (
@@ -245,7 +300,6 @@ export default function ResearchReportsPage() {
           </Select>
         </motion.div>
 
-        {/* Reports Grid */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -260,11 +314,18 @@ export default function ResearchReportsPage() {
               transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
             >
               <Card className={`bg-[#0f1622]/80 border-[#D4AF37]/20 backdrop-blur-sm hover:border-[#D4AF37]/50 transition-all h-full flex flex-col ${report.featured ? 'border-[#D4AF37]/50 ring-1 ring-[#D4AF37]/30' : ''}`}>
+                {report.isLatest && (
+                  <div className="absolute top-3 left-3">
+                    <Badge className="bg-rose-500 text-white border-none">
+                      {langKey === "zh" ? "最新 Latest" : "Latest"}
+                    </Badge>
+                  </div>
+                )}
                 {report.featured && (
                   <div className="absolute top-3 right-3">
                     <Badge className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#0f1622] border-none">
                       <Sparkles className="size-3 mr-1" />
-                      {langKey === "zh" ? "精选" : "Featured"}
+                      {langKey === "zh" ? "精選文獻" : "Featured Research"}
                     </Badge>
                   </div>
                 )}
@@ -285,9 +346,9 @@ export default function ResearchReportsPage() {
                 </CardHeader>
                 <CardContent className="flex-1 pb-3">
                   <div className="flex flex-wrap gap-2 mb-3">
-                    {report.tags.map((tag) => (
-                      <span key={tag} className="text-xs bg-white/5 border border-white/10 rounded-full px-2.5 py-1 text-gray-300">
-                        {tag}
+                    {report.tags.map((tagItem, tagIdx) => (
+                      <span key={tagIdx} className="text-xs bg-white/5 border border-white/10 rounded-full px-2.5 py-1 text-gray-300">
+                        {getTagText(tagItem)}
                       </span>
                     ))}
                   </div>
@@ -306,7 +367,7 @@ export default function ResearchReportsPage() {
                   >
                     <a href={report.sourceUrl} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="size-4 mr-2" />
-                      {langKey === "zh" ? "查看报告" : "View Report"}
+                      {langKey === "zh" ? "透過連結查看原文" : "Open Source Link"}
                     </a>
                   </Button>
                 </CardFooter>
@@ -315,7 +376,6 @@ export default function ResearchReportsPage() {
           ))}
         </motion.div>
 
-        {/* Empty State */}
         {filteredReports.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -324,10 +384,10 @@ export default function ResearchReportsPage() {
           >
             <FileText className="size-16 text-gray-600 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-white mb-2">
-              {langKey === "zh" ? "没有找到相关报告" : "No reports found"}
+              {langKey === "zh" ? "未找到相關研究文獻" : "No matching research papers found"}
             </h3>
             <p className="text-gray-400">
-              {langKey === "zh" ? "尝试更换搜索关键词或分类" : "Try changing search keywords or category"}
+              {langKey === "zh" ? "嘗試調整搜尋關鍵字或分類篩選" : "Try adjusting search keywords or category filter"}
             </p>
           </motion.div>
         )}
